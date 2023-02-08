@@ -40,7 +40,7 @@ public class Room
         return exits.get(direction);
     }
 
-    public void exitsToString(Room room) {
+    public void exitsToString() {
         exits.forEach((String key, Room val) -> System.out.print(key + " ") );
         System.out.println();
     }
@@ -56,6 +56,10 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+
+    public String getLongDescription() {
+        return "You are on the " + description + "\nExits: ";
     }
 
 }
