@@ -32,6 +32,10 @@ public class Parser
         reader = new Scanner(System.in);
     }
 
+    public String showCommands() {
+        return commands.showAll();
+    }
+
     /**
      * @return The next command from the user.
      */
