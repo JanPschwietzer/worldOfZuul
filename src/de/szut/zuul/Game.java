@@ -80,6 +80,19 @@ public class Game
         basement.setExit("up", templePyramid);
         wizard.setExit("window", marketsquare);
 
+        //init Items
+
+        marketsquare.setItem(new Item("bow", "a bow made of wood", 0.5));
+        cave.setItem(new Item("treasure", "a small treasure filled with coins", 7.5));
+        wizard.setItem(new Item("arrows", "a quiver filled with arrows", 1.0));
+        jungle.setItem(new Item("plant", "a healing plant", 0.5));
+        jungle.setItem(new Item("cocoa", "a small cocoa plant", 5));
+        sacrificialSite.setItem(new Item("knife", "a very sharp and big knife", 1));
+        hut.setItem(new Item("spear", "a speer with it's belonging sling", 5.0));
+        tavern.setItem(new Item("food", "a plate with flesh and beer", 0.5));
+        basement.setItem(new Item("jewellery", "a sweet diadem", 1.0));
+
+
         currentRoom = marketsquare;  // start game on marketsquare
     }
 
@@ -115,7 +128,6 @@ public class Game
 
     private void printRoomInformation() {
         System.out.print(currentRoom.getLongDescription());
-        currentRoom.exitsToString();
     }
 
     private void look() {
