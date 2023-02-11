@@ -62,10 +62,20 @@ public class Room
                 .append(", ")
                 .append(item.getDescription())
                 .append(", weight: ")
-                .append(item.getWeight()));
-        str.append("kg");
+                .append(item.getWeight())
+                .append("kg\n"));
 
         return str.toString();
+    }
+
+    Item removeItem(String name) {
+        try {
+            Item i = items.get(name);
+            items.remove(name);
+            return i;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public void setExit(String direction, Room room)

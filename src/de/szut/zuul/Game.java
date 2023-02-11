@@ -20,15 +20,16 @@ package de.szut.zuul;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
-        createRooms();
         parser = new Parser();
+        player = new Player();
+        createRooms();
     }
 
     /**
@@ -93,7 +94,7 @@ public class Game
         basement.setItem(new Item("jewellery", "a sweet diadem", 1.0));
 
 
-        currentRoom = marketsquare;  // start game on marketsquare
+        player.goToRoom(marketsquare);
     }
 
     /**
@@ -126,8 +127,15 @@ public class Game
         printRoomInformation();
     }
 
+    private void takeItem(Command command) {
+        //Hier weitermachen
+    }
+    private void dropItem(Command command) {
+        //Hier weitermachen
+    }
+
     private void printRoomInformation() {
-        System.out.print(currentRoom.getLongDescription());
+        System.out.print(player.getCurrentRoom().getLongDescription());
     }
 
     private void look() {
@@ -197,13 +205,13 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = null;
-        nextRoom = currentRoom.getExit(direction);
+        nextRoom = player.getCurrentRoom().getExit(direction);
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }
         else {
-            currentRoom = nextRoom;
+            player.goToRoom(nextRoom);
             printRoomInformation();
         }
     }
