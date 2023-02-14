@@ -162,8 +162,20 @@ public class Game
         if (commandWord.equals("look")) {
             look();
         }
+        if (commandWord.equals("take")) {
+            takeItem(command);
+            printInformation();
+        }
+        if (commandWord.equals("drop")) {
+            dropItem(command);
+            printInformation();
+        }
 
         return wantToQuit;
+    }
+
+    public void printInformation() {
+        System.out.println(player.showStatus());
     }
 
     // implementations of user commands:
@@ -223,5 +235,18 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+
+    private void takeItem(Command command) {
+        Item i = player.getCurrentRoom().removeItem(command.getSecondWord());
+        if (!player.takeItem(i)) System.out.println("You can't take this item!");
+        System.out.println("You picked up a " + command.getSecondWord());
+    }
+
+    private void dropItem(Command command) {
+        Item i = player.dropItem(command.getSecondWord());
+        if (i == null) System.out.println("Item does not exist.");
+        player.getCurrentRoom().setItem(i);
+        System.out.println(command.getSecondWord() + " dropped.");
     }
 }

@@ -83,6 +83,17 @@ public class Room
         this.exits.put(direction, room);
     }
 
+    Item removeItem(String name) {
+        if (!itemInRoom(name)) return null;
+        Item i = items.get(name);
+        items.remove(name);
+        return i;
+    }
+
+    public boolean itemInRoom(String name) {
+        return items.get(name) != null;
+    }
+
     /**
      * @return The description of the room.
      */
