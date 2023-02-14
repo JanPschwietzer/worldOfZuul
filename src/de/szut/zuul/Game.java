@@ -25,7 +25,7 @@ public class Game
     /**
      * Create the game and initialise its internal map.
      */
-    public Game() 
+    public Game()
     {
         parser = new Parser();
         player = new Player();
@@ -93,8 +93,8 @@ public class Game
         tavern.setItem(new Item("food", "a plate with flesh and beer", 0.5));
         basement.setItem(new Item("jewellery", "a sweet diadem", 1.0));
 
+        player.goTo(marketsquare);
 
-        player.goToRoom(marketsquare);
     }
 
     /**
@@ -125,13 +125,6 @@ public class Game
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         printRoomInformation();
-    }
-
-    private void takeItem(Command command) {
-        //Hier weitermachen
-    }
-    private void dropItem(Command command) {
-        //Hier weitermachen
     }
 
     private void printRoomInformation() {
@@ -211,7 +204,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            player.goToRoom(nextRoom);
+            player.goTo(nextRoom);
             printRoomInformation();
         }
     }
