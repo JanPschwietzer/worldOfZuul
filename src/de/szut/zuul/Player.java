@@ -20,21 +20,19 @@ public class Player {
         return currentLoad + weight;
     }
 
-    private boolean isTakePossible(Item item) {
+    private boolean isTakePossible(Item item) throws ItemTooHeavyException{
         return calculateWeight(item.getWeight()) <= loadCapacity;
     }
 
-    public boolean takeItem(Item item) {
-        if (!isTakePossible(item)) return false;
+    public void takeItem(Item item) throws ItemTooHeavyException{
+        if (currentLoad + item.getWeight() > loadCapacity) throw new ItemTooHeavyException();
         inventory.add(item);
         currentLoad += item.getWeight();
-        return true;
     }
 
-    public Item dropItem(String itemName) {
-
+    public Item dropItem(String itemName) throws ItemNotFoundException{
         int index = checkIfInInventory(itemName);
-        if (!dropPossible(index)) return null;
+        if (!dropPossible(index)) throw new ItemNotFoundException();
 
         Item retItem = inventory.get(index);
         currentLoad -= retItem.getWeight();

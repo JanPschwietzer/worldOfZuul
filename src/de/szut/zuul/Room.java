@@ -83,15 +83,11 @@ public class Room
         this.exits.put(direction, room);
     }
 
-    Item removeItem(String name) {
-        if (!itemInRoom(name)) return null;
+    Item removeItem(String name) throws ItemNotFoundException{
+        if(this.items.get(name) == null) throw new ItemNotFoundException();
         Item i = items.get(name);
         items.remove(name);
         return i;
-    }
-
-    public boolean itemInRoom(String name) {
-        return items.get(name) != null;
     }
 
     /**

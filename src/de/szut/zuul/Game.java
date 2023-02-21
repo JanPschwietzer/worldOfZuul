@@ -237,16 +237,28 @@ public class Game
         }
     }
 
-    private void takeItem(Command command) {
-        Item i = player.getCurrentRoom().removeItem(command.getSecondWord());
-        if (!player.takeItem(i)) System.out.println("You can't take this item!");
-        System.out.println("You picked up a " + command.getSecondWord());
+    private void takeItem(Command command){
+        try {
+            Item item = this.player.getCurrentRoom().removeItem(command.getSecondWord());
+
+            try {
+                this.player.takeItem(item);
+            } catch (ItemTooHeavyException e) {
+                this.player.getCurrentRoom().setItem(item);
+                System.out.println("Item too heavy");
+            }
+        } catch (ItemNotFoundException e) {
+            System.out.println("This item does not exist.");
+        }
     }
 
     private void dropItem(Command command) {
-        Item i = player.dropItem(command.getSecondWord());
-        if (i == null) System.out.println("Item does not exist.");
-        player.getCurrentRoom().setItem(i);
-        System.out.println(command.getSecondWord() + " dropped.");
+        try {
+            Item i = player.dropItem(command.getSecondWord());
+            player.getCurrentRoom().setItem(i);
+            System.out.println(command.getSecondWord() + " dropped.");
+        } catch (ItemNotFoundException e) {
+            System.out.println("You don't owe this item!");
+        }
     }
 }
